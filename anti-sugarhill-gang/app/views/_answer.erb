@@ -1,0 +1,15 @@
+<li> Answer: <%= answer_obj.answer %></li>
+        <% if answer_obj %>
+        <br><br>
+          Answer's Comments: <% answer_obj.answer_comments.each do |answer| %>
+            <%= erb :_answer_comment, layout: false, locals: { answer: answer } %>
+          <% end %>
+        <% end %>
+        <div id="answer_comments">
+	<% if session[:user_id] %>
+	<form action="/questions/answer_comment/<%= params[:id] %>" method="post">
+		<p>Add comment:</p>
+		<textarea rows="1" cols="50" name="comment"></textarea>
+		<input type="submit">
+	</form>
+	<% end %>

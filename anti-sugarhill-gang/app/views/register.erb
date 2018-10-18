@@ -1,0 +1,26 @@
+<style>
+#registration_div {
+	width: 550px;
+	margin: auto;
+	border: 1px solid black;
+	padding: 10px;
+}
+</style>
+
+<div id="registration_div">
+	<% if @error %>
+	<%= @error %>
+	<% end %>
+	<h2>Register:</h2>
+	<form action="/user/register" method="post">
+		<h3>First Name:</h3>
+		<input type="text" name="first_name">
+		<h3>Last Name:</h3>
+		<input type="text" name="last_name">
+		<h3>Email:</h3>
+		<input type="text" name="email">
+		<h3>Password:</h3>
+		<input type="password" name="password">
+		<input type="submit" value="Submit">
+	</form>
+</div>

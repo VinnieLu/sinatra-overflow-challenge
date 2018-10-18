@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="/css/normalize.css">
+  <link rel="stylesheet" href="/css/application.css">
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script src="/js/application.js?app=skills"></script>
+
+  <title></title>
+</head>
+<body>
+<style>
+#header {
+	width: 550px;
+	margin: auto;
+	border: 1px solid black;
+	padding: 10px;
+}
+#logo {
+	background: linear-gradient(#dbca32, #605918);
+	color: #ad3f08;
+	width: 200px;
+	float: left;
+	margin-right: 40px;
+}
+#header_text {
+	color: #ffffff;
+}
+</style>
+
+  <div id="header">
+	<div id="logo">
+		<h2>Flack Floverflow</h2>
+	</div>
+
+	<h2><a id="header_text" href="/questions">Home  |  </a>
+
+	<% if session[:user_id] == nil %>
+	<a id="header_text" href="/user/login">Login  |  </a>
+	<% else %>
+	<a id="header_text" href="/user/logout">Logout  |  </a>
+	<% end %>
+
+	<a id="header_text" href="/user/register">Register</a></h2>
+  </div>
+  <%= yield %>
+</body>
+</html>

@@ -1,0 +1,104 @@
+<style>
+#question_comments {
+	margin: auto;
+	width: 200px;
+	padding-right: 250px;
+	color: #bcbcb8;
+}
+#answer_comments {
+	margin: auto;
+	width: 200px;
+	padding-right: 250px;
+}
+#answer_text {
+	margin: auto;
+	width: 500px;
+	color: #bcbcb8;
+}
+#question_text {
+	margin: auto;
+	width: 500px;
+	color: #bcbcb8;
+}
+#answer_add {
+	margin: auto;
+	width: 200px;
+	padding-right: 250px;
+	padding-bottom: 200px;
+}
+
+</style>
+
+
+<div id="question_text">
+    <h1><%= @question.question %></h1>
+    <p> <%= @question.user.email %> </p>
+    ______________________________________________
+    <h2> Question Comments </h2>
+      <% array = @question.question_comments %>
+      <% if array.length == 0 %>
+        This question currently has no comments.
+      <% else %>
+        <% array.each do |question_comment_obj| %>
+            <%= erb :_question_comment, layout: false, locals: { question_comment_obj: question_comment_obj } %>
+          <% end %>
+        <% end %>
+</div>
+
+
+
+
+<div id="question_comments">
+	<% if session[:user_id] %>
+	<form action="/questions/question_comment/<%= params[:id] %>" method="post">
+		<h2>Add comment for the question:</h2>
+		<textarea rows="1" cols="50" name="comment"></textarea>
+		<input type="submit">
+	</form>
+	<% end %>
+</div>
+
+
+
+
+<div id="answer_text">
+
+	<h2> Answers </h2>
+      <% answer_array = @question.answers.map {|answer| answer} %>
+      <% if answer_array.length == 0 %>
+        This question currently has no answers.
+      <% else %>
+      <% answer_array.each do |answer_obj| %>
+      <br>
+       <li> Answer: <%= answer_obj.answer %></li>
+        <% if answer_obj %>
+        <br><br>
+          Answer's Comments: <% answer_obj.answer_comments.each do |answer| %>
+            <%= erb :_answer_comment, layout: false, locals: { answer: answer } %>
+          <% end %>
+        <% end %>
+        <div id="answer_comments">
+	<% if session[:user_id] %>
+	<form action="/questions/answer_comment/<%= params[:id] %>" method="post">
+		<p>Add comment:</p>
+		<textarea rows="1" cols="50" name="comment"></textarea>
+		<input type="submit">
+	</form>
+	<% end %>
+</div>
+      </ul>
+    <% end %>
+    <% end %>
+
+</div>
+
+
+<div id="answer_add">
+	<% if session[:user_id] %>
+	<form action="/questions/answer_add/<%= params[:id] %>" method="post">
+		<h2>Add answer:</h2>
+		<textarea rows="7" cols="50" name="answer"></textarea>
+		<input type="submit">
+	</form>
+	<% end %>
+</div>

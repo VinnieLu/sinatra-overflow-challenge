@@ -1,0 +1,44 @@
+<style>
+  .container {
+    width: 1000px;
+    margin: auto;
+  }
+  .index_questions {
+    width: 750px;
+    height: 100px;
+    float: right;
+  }
+  .misc {
+    width: 150px;
+    height: 100px;
+    float: left;
+  }
+</style>
+
+<div class="container">
+
+<h1>Top Questions</h1>
+
+
+<ol>
+  <% @final.each do |question| %>
+        <div class="misc">
+          <h2>
+            <a class="index_upvote" href="/vote/upvote/<%=question.id%>"><</a>
+         Score:  <span id="score"><%= question.score %></span>
+          <a class="index_downvote" href="/vote/downvote/<%=question.id%>">></a>
+          Answers: <%= Answer.where(question_id: question.id).count %>
+          </h2>
+        </div>
+      <div class="index_questions">
+        <h2>
+  		  <li>
+    			<a href="/questions/<%= question.id %>"><%= question.question %></a>
+  		  </li>
+        <br>
+        </h2>
+      </div>
+  <% end %>
+</ol>
+
+</div>

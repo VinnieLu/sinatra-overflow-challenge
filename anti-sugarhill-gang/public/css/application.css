@@ -1,0 +1,11 @@
+body {
+	background: linear-gradient(to right, red, green, #376389, purple, #897336, orange);
+}
+
+.index_questions li a {
+	color: #ffffff;
+}
+
+.index_questions {
+	color: #ffffff;
+}
